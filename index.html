@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitBounty</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to BitBounty</h1>
+        <p>Your coins: <span id="coinCount">0</span></p>
+        <button id="earnButton">Tap To Earn</button>
+
+        <div class="navigation">
+            <button id="tasksButton">Tasks</button>
+            <button id="leaderboardButton">Leaderboard</button>
+            <button id="friendsButton">Friends</button>
+        </div>
+
+        <div id="tasksContainer" style="display:none;">
+            <h2>Tasks</h2>
+            <div id="tasksList"></div>
+        </div>
+
+        <div id="leaderboardContainer" style="display:none;">
+            <h2>Leaderboard</h2>
+            <div id="leaderboardList"></div>
+        </div>
+
+        <div id="friendsContainer" style="display:none;">
+            <h2>Friends</h2>
+            <div id="friendsList"></div>
+        </div>
+    </div>
+
+    <script>
+        var user_id = localStorage.getItem('user_id');
+
+        $(document).ready(function(){
+            if (!user_id) {
+                $.ajax({
+                    url: '/start',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "user_id": user_id }),
+                    success: function(data) {
+                        user_id = data.user_id;
+                        localStorage.setItem('user_id', user_id);
+                        $('#coinCount').text(data.coins);
+                    }
+                });
+            } else {
+                $.ajax({
+                    url: '/stats',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "user_id": user_id }),
+                    success: function(data) {
+                        $('#coinCount').text(data.coins);
+                    }
+                });
+            }
+
+            $('#earnButton').click(function(){
+                $.ajax({
+                    url: '/tap',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ "user_id": user_id }),
+                    success: function(data) {
+                        $('#coinCount').text(data.coins);
+                    }
+                });
+            });
+
+            $('#leaderboardButton').click(function(){
+              $.ajax({
+                url: '/leaderboard',
+                type: 'GET',
+                success: function(data) {
+                console.log(data);
+                    $('#leaderboardList').html("");
+                    if (data.leaderboard && data.leaderboard.length > 0) {
+                        data.leaderboard.forEach(function(player) {
+                            $('#leaderboardList').append('<p>' + player.username + ': ' + player.coins + ' coins</p>');
+                        });
+                    } else {
+                        $('#leaderboardList').append('<p>No leaderboard data available</p>');
+                    }
+                    $('#leaderboardContainer').show();
+                    $('#tasksContainer, #friendsContainer').hide();
+                   }     
+                });
+            });
+
+
+            $('#friendsButton').click(function(){
+                $.ajax({
+                    url: '/friends',
+                    type: 'GET',
+                    data: { "user_id": user_id },
+                    success: function(data) {
+                        $('#friendsList').html("");
+                        if (data.friends.length > 0) {
+                            data.friends.forEach(function(friend) {
+                                $('#friendsList').append('<p>' + friend.username + ' - ' + friend.progress + ' coins</p>');
+                            });
+                        } else {
+                            $('#friendsList').append('<p>No friends data available</p>');
+                        }
+                        $('#friendsContainer').show();
+                        $('#tasksContainer, #leaderboardContainer').hide();
+                    }
+                });
+            });
+
+            $('#tasksButton').click(function() {
+                $('#tasksContainer').show();
+                $('#leaderboardContainer, #friendsContainer').hide();
+            });
+        });
+    </script>
+</body>
+</html>

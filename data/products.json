@@ -1,0 +1,83 @@
+[
+    {
+        "id": 1,
+        "name": "Icebrg Energy",
+        "aliases": ["Iceberg", "Iceberg Energy", "Energy", "Snus"],
+        "price": 7,
+        "img": "visual/snus/iceberg/iceberg-energy.png",
+        "flavor": "Energy",
+        "category": "Snus"
+    },
+    {
+        "id": 2,
+        "name": "Cuba Cherry",
+        "aliases": ["Cuba", "Cuba Cherry", "Cherry", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba-cherry.png",
+        "flavor": "Cherry",
+        "category": "Snus"
+    },
+    {
+        "id": 3,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 4,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 5,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 6,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 7,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 8,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    },
+    {
+        "id": 9,
+        "name": "Cuba Black Currant",
+        "aliases": ["Cuba", "Cuba Black Currant", "Black Currant", "Snus"],
+        "price": 7,
+        "img": "visual/snus/cuba/cuba_blackcurrant.png",
+        "flavor": "Black Currant",
+        "category": "Snus"
+    }
+]

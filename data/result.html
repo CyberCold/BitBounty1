@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicotine Stars</title>
+    <link rel="stylesheet" href="design.css">
+</head>
+<body>
+    <header>
+        <div id="searchResults"></div>
+    </header>
+
+    <script src="loadProducts.js"></script> <!-- Загружаем товары -->
+    <script>
+        // Функция для загрузки товаров и отображения результатов поиска
+        async function loadProducts() {
+            try {
+                const response = await fetch('/data/products.json'); // Получаем список товаров
+                if (!response.ok) {
+                    console.error('Ошибка загрузки товаров:', response.status);
+                    return;
+                }
+                const products = await response.json();
+                console.log('Загруженные товары:', products);
+
+                // Получаем поисковый запрос из строки URL
+                const searchQuery = new URLSearchParams(window.location.search).get('query');
+                if (searchQuery) {
+                    const filteredProducts = products.filter(product =>
+                        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        product.aliases.some(alias => alias.toLowerCase().includes(searchQuery.toLowerCase()))
+                    );
+                    displaySearchResults(filteredProducts); // Показываем отфильтрованные товары
+                } else {
+                    displaySearchResults(products); // Показываем все товары
+                }
+            } catch (error) {
+                console.error('Ошибка загрузки товаров:', error);
+            }
+        }
+
+        // Функция для отображения товаров
+        function displaySearchResults(products) {
+    const resultContainer = document.getElementById('searchResults');
+    resultContainer.innerHTML = ''; // Очищаем контейнер
+
+    if (products.length === 0) {
+        resultContainer.innerHTML = '<p>Nothing found.</p>';
+    } else {
+        products.forEach(product => {
+            const productElement = document.createElement('div');
+            productElement.classList.add('product');
+            productElement.innerHTML = `
+
+
+                <div class="product-card">
+                    <a href="product-details.html?id=${product.id}" class="product-link">
+                        <!-- Указываем путь от корня сайта к папке visual -->
+                        <img src="/${product.img}" alt="${product.name}" class="product-img" />
+                    </a>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>Price: ${product.price} eur.</p>
+                    </div>
+                </div>
+
+
+            `;
+            resultContainer.appendChild(productElement);
+        });
+    }
+}
+
+        // Загружаем товары при старте
+        loadProducts();
+    </script>
+</body>
+</html>

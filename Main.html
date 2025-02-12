@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Nicotine Stars</title>
+    <link rel="stylesheet" href="design.css">
+    <script src="brains.js" defer></script>
+    <script src="data/loadProducts.js" defer></script>
+    <script src="js/addToCart.js" defer></script>
+    <script src="js/cart.js" defer></script>
+    <script>
+        function filterProducts(brandName) {
+            // Находим поле для поиска
+            var searchInput = document.getElementById('searchInput');
+            
+            // Устанавливаем значение бренда в поле поиска
+            searchInput.value = brandName;
+            
+            // Здесь можно добавить логику для поиска, например, отправить запрос на сервер
+            // или вызвать функцию, которая будет фильтровать товары на странице
+            console.log("Фильтруем по бренду: " + brandName);
+        }
+    </script>
+    
+    </head>
+<body>
+    <header>
+        <div class="top-part">
+            <ul>
+                <div class="menu-toggle" role="button" aria-label="Toggle Sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+                <div class="logo">Nicotine Stars</div>
+                <div class="icons">
+                    <div class="search">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                    </div>
+                    <div class="search_large">
+                        <form action="data/result.html" method="get" role="search" class="search-modal__form" id="search-form">
+                            <div class="field">
+                                <input class="search__input field__input" id="Search-In-Modal" type="search" name="query" placeholder="Search..." autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+                                <input type="hidden" name="options[prefix]" value="last">
+                                <button type="submit" class="search__button field__button" aria-label="Search...">
+                                    <img src="https://cdn.shopify.com/s/files/1/0579/2156/8960/files/search.png" alt="search icon">
+                                </button>
+                            </div>
+                        </form>                        
+                        <ul id="predictive-search-results-list" class="search-results-list"></ul>
+                    </div>
+                    <div id="cart-icon" class="cart-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
+                        </svg>
+                        <span id="cart-count" class="cart-count"></span>
+                    </div>
+                    
+                    <div class="account">
+                        <a href="User.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </ul>
+                <nav class="header__inline-menu">
+                    <div class="container-fluid"  id="for-large-screens">
+                            <div>
+                                <ul class="bottom_menu">
+                                    <div class="tmenu_wrapper">
+                                        <nav class="tmenu_navbar tmenu_app tmenu_initialized tmenu_transition_none tmenu_alignment_start tmenu_skin_undefined tmenu_app--horizontal">
+                                            <ul class="tmenu_nav">
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('snus')" onmouseout="closeSubmenu('snus')">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>SNUS</strong>
+                                                        </span>
+                                                        <span class="tmenu_indicator">
+                                                            <span class="tmenu_indicator_icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </a>
+                                                    <ul id="snus-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Cuba')">Cuba</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Iceberg')">Iceberg</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Supreme')">Supreme</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('liquid')" onmouseout="closeSubmenu('liquid')">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>LIQUID</strong>
+                                                        </span>
+                                                        <span class="tmenu_indicator">
+                                                            <span class="tmenu_indicator_icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </a>
+                                                    <ul id="liquid-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
+                                                    <a role="button" href="javascript:void(0)" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('disposablevape')" onmouseout="closeSubmenu('disposablevape')">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>DISPOSABLE VAPE</strong>
+                                                        </span>
+                                                        <span class="tmenu_indicator">
+                                                            <span class="tmenu_indicator_icon">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                                    <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </span>
+                                                    </a>
+                                                    <ul id="disposablevape-submenu" class="submenu" style="display: none;">
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                                                        <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
+                                                    <a role="button" href="/bestsellers" target="_self" title="<strong>BEST SELLERS</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>BEST SELLERS</strong>
+                                                        </span> 
+                                                    </a>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
+                                                    <a role="button" href="/sales" target="_self" title="<strong>SALES</strong>" class="tmenu_item_link">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>SALES</strong>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
+                                                    <a role="button" href="/fewleftinstock" target="_self" title="<strong>FEW LEFT IN STOCK</strong>" class="tmenu_item_link">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>FEW LEFT IN STOCK</strong>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+                                                    <a role="button" href="/info" target="_self" title="<strong>INFO</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>INFO</strong>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+                                                    <a role="button" href="/competitions" target="_self" title="<strong>COMPETITIONS</strong>" aria-expanded="false" class="tmenu_item_link">
+                                                        <span class="tmenu_item_text">
+                                                            <strong>COMPETITIONS</strong>
+                                                        </span>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </nav>
+                            </div>
+                        </nav>
+                    </div>
+            </ul>
+        <hr class="top_menu_hr" width="100%" size="1">
+            </div>
+        </header>
+<div class="sidebar">
+    <ul class="mobile">
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>SNUS</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('snus')" onmouseout="closeSubmenu('snus')">
+                <span class="tmenu_item_text">
+                    <strong>SNUS</strong>
+                </span>
+                <span class="tmenu_indicator">
+                    <span class="tmenu_indicator_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                        </svg>
+                    </span>
+                </span>
+            </a>
+            <ul id="snus-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Cuba')">Cuba</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Iceberg')">Iceberg</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Supreme')">Supreme</a></li>
+            </ul>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>LIQUID</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('liquid')" onmouseout="closeSubmenu('liquid')">
+                <span class="tmenu_item_text">
+                    <strong>LIQUID</strong>
+                </span>
+                <span class="tmenu_indicator">
+                    <span class="tmenu_indicator_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                        </svg>
+                    </span>
+                </span>
+            </a>
+            <ul id="liquid-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+            </ul>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
+            <a role="button" href="javascript:void(0)" target="_self" title="<strong>DISPOSABLE VAPE</strong>" aria-expanded="false" class="tmenu_item_link" onmouseover="openSubmenu('disposablevape')" onmouseout="closeSubmenu('disposablevape')">
+                <span class="tmenu_item_text">
+                    <strong>DISPOSABLE VAPE</strong>
+                </span>
+                <span class="tmenu_indicator">
+                    <span class="tmenu_indicator_icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor" d="M256 294.1L383 167c9.4-9.4 24.6-9.4 33.9 0s9.3 24.6 0 34L273 345c-9.1 9.1-23.7 9.3-33.1.7L95 201.1c-4.7-4.7-7-10.9-7-17s2.3-12.3 7-17c9.4-9.4 24.6-9.4 33.9 0l127.1 127z"></path>
+                        </svg>
+                    </span>
+                </span>
+            </a>
+            <ul id="disposablevape-submenu" class="submenu" style="display: none;">
+                <li><a href="javascript:void(0)" onclick="filterProducts('Vozol')">Vozol</a></li>
+                <li><a href="javascript:void(0)" onclick="filterProducts('Elf bar')">Elf bar</a></li>
+            </ul>
+        </li>
+        
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout tmenu_item_has_child">
+            <a role="button" href="/bestsellers" target="_self" title="<strong>BEST SELLERS</strong>" aria-expanded="false" class="tmenu_item_link">
+                <span class="tmenu_item_text">
+                    <strong>BEST SELLERS</strong>
+                </span> 
+            </a>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
+            <a role="button" href="/sales" target="_self" title="<strong>SALES</strong>" class="tmenu_item_link">
+                <span class="tmenu_item_text">
+                    <strong>SALES</strong>
+                </span>
+            </a>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_flyout">
+            <a role="button" href="/fewleftinstock" target="_self" title="<strong>FEW LEFT IN STOCK</strong>" class="tmenu_item_link">
+                <span class="tmenu_item_text">
+                    <strong>FEW LEFT IN STOCK</strong>
+                </span>
+            </a>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+            <a role="button" href="/info" target="_self" title="<strong>INFO</strong>" aria-expanded="false" class="tmenu_item_link">
+                <span class="tmenu_item_text">
+                    <strong>INFO</strong>
+                </span>
+            </a>
+        </li>
+        <li class="tmenu_item tmenu_item--root tmenu_item_level_0 tmenu_item_submenu_type_mega tmenu_item_submenu_mega_position_fullwidth tmenu_item_has_child">
+            <a role="button" href="/competitions" target="_self" title="<strong>COMPETITIONS</strong>" aria-expanded="false" class="tmenu_item_link">
+                <span class="tmenu_item_text">
+                    <strong>COMPETITIONS</strong>
+                </span>
+                </span>
+            </a>
+        </li>
+    </ul>
+</div>
+    </sticky-header>
+    <input type="text" class="search-bar" placeholder="Search...">
+    <div class="cart">Your cart is empty.</div>
+    <main>
+        <section class="best-sellers">
+            <h2 class="text_best_seller">Best Sellers</h2>
+            <div class="grid">
+                <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
+                <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
+                <div class="image"><img src="https://pouches.eu/cdn/shop/files/icemintextreme_1_1200x.png?v=1714482444"></div>
+            </div>
+        </section>
+        <section class="products">
+            
+            <div id="searchResults"></div>
+        <script src="js/main.js" defer></script>
+        </section>
+    </main>
+</body>
+</html>

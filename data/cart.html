@@ -1,0 +1,39 @@
+<div id="cartItems"></div>
+<button onclick="clearCart()">Очистить корзину</button>
+
+<script>
+    // Отображение товаров в корзине
+    function displayCart() {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cartItems');
+
+        if (cart.length === 0) {
+            cartItemsContainer.innerHTML = '<p>Корзина пуста</p>';
+        } else {
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.innerHTML = `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" class="cart-item-img" />
+                        <div class="cart-item-info">
+                            <h3>${item.name}</h3>
+                            <p>${item.price} руб.</p>
+                            <p>Количество: ${item.quantity}</p>
+                        </div>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(itemElement);
+            });
+        }
+    }
+
+    // Очистить корзину
+    function clearCart() {
+        localStorage.removeItem('cart');
+        displayCart();
+    }
+
+    // Загружаем корзину
+    displayCart();
+</script>
